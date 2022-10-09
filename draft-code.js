@@ -49,19 +49,41 @@ function roomDescriptions(x, y) {
     ? log(graphics.map32)
     : log(graphics.map33);
 }
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-cfonts.say("Gabriel's amazing game", {
-  gradient: ['yellow', 'green'],
-  font: 'block',
-  background: 'transparent',
-});
+async function welcome() {
+  const rainbowTitle = chalkAnimation.karaoke(
+    `  ====================
+  Are you ready to play...
+  ====================`,
+    0.85
+  );
+  await sleep(2080);
+  rainbowTitle.stop();
+  cfonts.say('The Game', {
+    colors: ['#FFC400'],
+    font: 'block',
+    background: 'transparent',
+  });
+}
+await welcome();
 log('You are in the start');
+await sleep(1400);
 log(graphics.map22);
 let x = 2;
 let y = 2;
 
 while (true) {
-  let chooseDirection = rl.question('Where would you like to go? ');
+  let chooseDirection = rl.question(`
+   __| |______________________________________| |__
+  (__   ______________________________________   __)
+     | |                                      | |
+     | |     Where would you like to go?      | |
+   __| |______________________________________| |__
+  (__   ______________________________________   __)
+     | |                                      | |
+                      `);
   directionLogic(chooseDirection);
   roomDescriptions(x, y);
+  log(`--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--<>--`);
 }
