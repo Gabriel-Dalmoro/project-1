@@ -1,5 +1,5 @@
 //basic structure to the game
-import * as graphics from './graphics.js';
+import * as graphics from './helper-files/graphics.js';
 import cfonts from 'cfonts';
 import rl from 'readline-sync';
 import chalk from 'chalk';
@@ -75,13 +75,10 @@ let y = 2;
 
 while (true) {
   let chooseDirection = rl.question(`
-   __| |______________________________________| |__
-  (__   ______________________________________   __)
-     | |                                      | |
-     | |     Where would you like to go?      | |
-   __| |______________________________________| |__
-  (__   ______________________________________   __)
-     | |                                      | |
+    ______________________________________ 
+   |                                      |
+   |     Where would you like to go?      |
+   |______________________________________|
                       `);
   directionLogic(chooseDirection);
   roomDescriptions(x, y);

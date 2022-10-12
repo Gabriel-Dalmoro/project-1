@@ -2,7 +2,7 @@
   "name": "1-project",
   "version": "0.1.0",
   "description": "My project 1 for InceptionU; a command line text game.",
-  "main": "draft-code.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

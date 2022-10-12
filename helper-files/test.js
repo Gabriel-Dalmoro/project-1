@@ -8,6 +8,6 @@ import {
   map31,
   map32,
   map33,
-} from './graphics.js';
+} from './helper-files/graphics.js';
 
 console.log(map22);
