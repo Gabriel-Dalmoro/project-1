@@ -1,16 +1,12 @@
-# Project 1
-
-by Gabriel H. Dalmoro
-
-## CLI Text Adventure Game
+# Project 1 - CLI Text Adventure Game
 
 > **First project for InceptionU full-stack-developer course. A CLI text-based adventure game, using Node.js, Express.js, API calls, and HTTP. Base code written in JavaScript.**
 
----
-
-To start the server, run `code` $ npm start
+by Gabriel H. Dalmoro
 
 ---
+
+To start the server, run `$ npm start`.
 
 ### WALKTHROUGH
 
