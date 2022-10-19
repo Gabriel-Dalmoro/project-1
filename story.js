@@ -1,117 +1,75 @@
 import chalk from 'chalk';
 import { eyeGraphic } from './helper-files/graphics.js';
 const log = console.log;
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 //intro and background story
 export async function intro() {
-  log(`
-  Still feeling disoriented, you open your eyes.`);
+  log(`Still feeling disoriented, you open your eyes.`);
   await sleep(3000);
-  log(eyeGraphic);
+  eyeGraphic;
   await sleep(3000);
   log(
     `You think to yourself, "I think it worked... yes... ` +
-      chalk.bold(`IT FINALLY WORKED!"
-      `)
+      chalk.bold(`IT FINALLY WORKED!"`)
   );
   await sleep(3000);
-  log(`After decades of hard work, general ridicule, countless rejections, 
-and ostracising from those you once considered if not friends, at least
-respectable colleages... it worked.
-`);
+  log(`After decades of hard work, general ridicule, countless rejections,
+  and ostracising from those you once considered if not friends, at least
+  respectable colleages... it worked.
+  `);
   await sleep(8000);
   log(`The slightly pixelated environment surrounds your whole field of view, and a
-deep sense of pride and vindication takes over your mind and spirit.
-`);
+  deep sense of pride and vindication takes over your mind and spirit.
+  `);
   await sleep(5000);
   log(`While your body lays comfortably on your office chair, your senses and your
-consious mind are elsewhere. Thousands upon thousands of lines of code,
-working together with absolutely revolutionary hardware has transported
-your mind...
-`);
+  consious mind are elsewhere. Thousands upon thousands of lines of code,
+  working together with absolutely revolutionary hardware has transported
+  your mind...
+  `);
   await sleep(10000);
   log(`You are INSIDE the game.`);
   await sleep(5000);
 }
 
-export async function roomDescriptions(x, y) {
-  if (x <= 3 && x >= 1 && y <= 3 && y >= 1) {
-    x === 2 && y === 2
-      ? description22()
-      : x === 2 && y === 3
-      ? await description23()
-      : x === 2 && y === 1
-      ? await description21()
-      : x === 1 && y === 1
-      ? await description11()
-      : x === 1 && y === 2
-      ? await description12()
-      : x === 1 && y === 3
-      ? await description13()
-      : x === 3 && y === 1
-      ? await description31()
-      : x === 3 && y === 2
-      ? await description32()
-      : x === 3 && y === 3
-      ? await description33()
-      : log(`*room not ready yet*
-  `);
-  } else return;
-}
-
-async function description11() {
-  log(`
-    You are in a spooky cemetery. An eerie feeling is in the air.
-    `);
-  await sleep(2000);
-  log(`
-      ,-=-.       ______     _
-     /  +  \\\     />----->  _|1|_
-     | ~~~ |    // -/- /  |_ H _|
-     |R.I.P|   //  /  /     |S|
+export const ROOM_DESCRIPTIONS = {
+  x1y1: `
+  You are in a spooky cemetery. An eerie feeling is in the air.
+    ,-=-.       ______     _
+   /  +  \\\     />----->  _|1|_
+   | ~~~ |    // -/- /  |_ H _|
+   |R.I.P|   //  /  /     |S|
 \\vV,,|_____|V,//_____/VvV,v,|_|/,,vhjwv/,
-    `);
-}
-async function description12() {
-  log(`
-    You are in a desert. The hot air brings prespiration running down your temples.
-    `);
-  await sleep(2000);
-  log(`
-                /||\\
-                ||||
-                ||||
-                |||| /|\\
-           /|\\  |||| |||
-           |||  |||| |||
-           |||  |||| |||
-           |||  |||| d||
-           |||  |||||||/
-           ||b._||||~~'
-           \\||||||||
-            '~~~||||
-                ||||
-                ||||
+  `,
+  x1y2: `
+  You are in a desert. The hot air brings prespiration running down your temples.
+   
+              /||\d\
+              ||||
+              ||||
+              |||| /|\\
+         /|\\  |||| |||
+         |||  |||| |||
+         |||  |||| |||
+         |||  |||| d||
+         |||  |||||||/
+         ||b._||||~~'
+         \\||||||||
+          '~~~||||
+              ||||
+              ||||
 ~~~~~~~~~~~~~~~~||||~~~~~~~~~~~~~~
-  \\/..__..--  . |||| \\/  .  ..
+\\/..__..--  . |||| \\/  .  ..
 \\/         \\/ \\/    \\/
-        .  \\/              \\/    .
+      .  \\/              \\/    .
 . \\/             .   \\/     .
-   __...--..__..__       .     \\/
+ __...--..__..__       .     \\/
 \\/  .   .    \\/     \\/    __..--..
-    `);
-  await sleep(3000);
-  log(`
-    To the far north, you see a triangular shape in the distance...
-    `);
-}
-async function description13() {
-  log(`
+  `,
+  x1y3: `
     Ahead of you is a misterious pyramid.
-    `);
-  await sleep(2000);
-  log(`
+    
                .
               /=\\\\
              /===\\ \\
@@ -128,13 +86,9 @@ async function description13() {
   /=========================\\   ' /
  /===========================\\'  /
 /=============================\\/
-    `);
-}
-async function description21() {
-  log(`You come upon a misterious temple.
-    `);
-  await sleep(2000);
-  log(`
+    `,
+  x2y1: `You come upon a mysterious temple.
+  
                )\\         O_._._._A_._._._O         /(
                 \\'--.___,'================='.___,--'/
                  \\'--._.__                 __._,--'/
@@ -163,22 +117,16 @@ async function description21() {
                 ()  |___________________________|  ()           '--'-
   --'-          /| _______________________________  |\\
  --'           / |__________________________________| \\
-    `);
-}
-function description22() {
-  log(`
-This is the start room.
-
-You are in a blank room, with 4 doors. One to your north, one south, 
-one to the west, and another to the east.
-`);
-}
-async function description23() {
-  log(`
+    `,
+  x2y2: `
+    This is the start room.
+    
+    You are in a blank room, with 4 doors. One to your north, one south, 
+    one to the west, and another to the east.
+    `,
+  x2y3: `
     You are surrounded by mountains.
-`);
-  await sleep(2000);
-  log(`
+
           /\\
          /**\\
         /****\\   /\\
@@ -188,14 +136,10 @@ async function description23() {
     /  /    \\/ /\\     \\    /    \\ \\  /    \\/ /   /  \\/  \\/  \\  /    \\   \\
    /  /      \\/  \\/\\   \\  /      \\    /   /    \\
 __/__/_______/___/__\\___\\__________________________________________________
-`);
-}
-async function description31() {
-  log(`
+`,
+  x3y1: `
     You are standing by a castle.
-    `);
-  await sleep(2000);
-  log(`
+    
                                                   !_
                                                   |*~=-.,
                                                   |_,-''
@@ -231,14 +175,10 @@ async function description31() {
      |=_ =       | =_-_| |  | |     |   =_      | -_   |
      |_=-_       |=_=  | |  | |     |=_=        |=-    |
 ^^^^^^^^^^'^'^^'^'^'^^^""""""""^'^^''^^'^^'^^'^'^''^'^''^''^^
-    `);
-}
-async function description32() {
-  log(`
+    `,
+  x3y2: `
     You find yourself in a beautiful beach.
-    `);
-  await sleep(2000);
-  log(`
+
               ,.  _~-.,               .
            ~''_ \\/,_. \\_
           / ,"_>@',__'~.)             |           .
@@ -257,18 +197,10 @@ async function description32() {
 _,.-=~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^''~=-.,.-=~''^''~=-.,__,.-=~'
 
 ~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^
-    `);
-  await sleep(3000);
-  log(`
-    To the north you see what looks to be a lighthouse...
-    `);
-}
-async function description33() {
-  log(`
+    `,
+  x3y3: `
     You are standing by a lighthouse.
-    `);
-  await sleep(2000);
-  log(`
+    
             +             /
 \\           |           /
   \\         |         /
@@ -288,8 +220,8 @@ async function description33() {
   ____~    |_|  |___           __-----~    ~'---,__             ___
 -~                  ~---___,--~'                  ~~----_____-~'
 '~----,____                      
-    `);
-}
+    `,
+};
 
 /*idea for rooms in game:
                           

@@ -1,11 +1,12 @@
 {
   "name": "1-project",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "My project 1 for InceptionU; a command line text game.",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --experimental-json-modules server/server.js"
   },
   "author": "Gabriel H. Dalmoro",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "cfonts": "^3.1.1",
     "chalk": "^5.1.0",
     "chalk-animation": "^2.0.3",
+    "express": "^4.18.2",
     "readline-sync": "^1.4.10"
   }
 }

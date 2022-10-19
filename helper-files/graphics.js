@@ -1,5 +1,21 @@
 import chalk from 'chalk';
-export const theMap = `                          
+const log = console.log;
+
+export let visit11;
+export function mapQuadrantVisit(x, y) {
+  if (x === 1 && y === 1) {
+    visit11 = true;
+  }
+}
+
+export function checkVisit11(visit11) {
+  if (visit11 === true) {
+    return `cemetery`;
+  } else return `        `;
+}
+
+export const MAPS_OBJECT = {
+  theMap: `                          
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
     |         |   |         |   |         |
@@ -19,9 +35,8 @@ export const theMap = `
     +---------+   +---------+   +---------+
      
 
-`;
-
-export const map11 = `                          
+`,
+  map11: `                          
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
     |         |   |         |   |         |
@@ -41,9 +56,8 @@ export const map11 = `
     +---------+   +---------+   +---------+
     you are HERE
 
-`;
-
-export const map12 = `                          
+`,
+  map12: () => `                          
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
     |         |   |         |   |         |
@@ -58,14 +72,13 @@ export const map12 = `
     you are HERE
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
-    |         |   |         |   |         |
+    |${checkVisit11(visit11)} |   |         |   |         |
     |         |   |         |   |         |
     +---------+   +---------+   +---------+
 
-
-`;
-
-export const map13 = `                          
+    
+`,
+  map13: `                          
     +---------+   +---------+   +---------+
     |    o    |   |         |   |         |
     |   /|\\   |   |         |   |         |
@@ -85,9 +98,9 @@ export const map13 = `
     +---------+   +---------+   +---------+
 
 
-`;
-
-export const map21 = `                          
+`,
+  map21:
+    `                          
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
     |         |   |         |   |         |
@@ -102,15 +115,16 @@ export const map21 = `
     
     +---------+   +---------+   +---------+
     |         |   |    o    |   |         |
-    |         |   |   /|\\   |   |         |
+    |` +
+    `${checkVisit11(visit11)}` +
+    ` |   |   /|\\   |   |         |
     |         |   |   / \\   |   |         |
     +---------+   +---------+   +---------+
                   you are HERE
 
-`;
-
-export const map22 =
-  `                          
+`,
+  map22:
+    `                          
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
     |         |   |         |   |         |
@@ -123,18 +137,19 @@ export const map22 =
     |         |   |   / \\   |   |         |
     +---------+   +---------+   +---------+
               you are at the ` +
-  chalk.green(`START`) +
-  `
+    chalk.green(`START`) +
+    `
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
-    |         |   |         |   |         |
+    |` +
+    `${checkVisit11(visit11)}` +
+    ` |   |         |   |         |
     |         |   |         |   |         |
     +---------+   +---------+   +---------+
    
 
-`;
-
-export const map23 = `                          
+`,
+  map23: `                          
     +---------+   +---------+   +---------+
     |         |   |    o    |   |         |
     |         |   |   /|\\   |   |         |
@@ -154,9 +169,8 @@ export const map23 = `
     +---------+   +---------+   +---------+
    
 
-`;
-
-export const map31 = `                          
+`,
+  map31: `                          
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
     |         |   |         |   |         |
@@ -176,9 +190,8 @@ export const map31 = `
     +---------+   +---------+   +---------+
                                 you are HERE
 
-`;
-
-export const map32 = `                          
+`,
+  map32: `                          
     +---------+   +---------+   +---------+
     |         |   |         |   |         |
     |         |   |         |   |         |
@@ -198,9 +211,8 @@ export const map32 = `
     +---------+   +---------+   +---------+
    
 
-`;
-
-export const map33 = `                          
+`,
+  map33: `                          
     +---------+   +---------+   +---------+
     |         |   |         |   |    o    |
     |         |   |         |   |   /|\\   |
@@ -220,7 +232,8 @@ export const map33 = `
     +---------+   +---------+   +---------+
    
 
-`;
+`,
+};
 
 const personGraphic = `
  o
@@ -256,3 +269,20 @@ export const eyeGraphic = `
         .              .     .    .                      .         .
 .                                         .          .         .
 `;
+
+//     : x === 1 && y === 2
+//     ? (visit12 = true)
+//     : x === 1 && y === 3
+//     ? (visit13 = true)
+//     : x === 2 && y === 1
+//     ? (visit21 = true)
+//     : x === 2 && y === 2
+//     ? (visit22 = true)
+//     : x === 2 && y === 3
+//     ? (visit23 = true)
+//     : x === 3 && y === 1
+//     ? (visit31 = true)
+//     : x === 3 && y === 2
+//     ? (visit32 = true)
+//     : (visit33 = true);
+// }
