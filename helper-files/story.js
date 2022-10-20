@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { eyeGraphic } from './helper-files/graphics.js';
+import { eyeGraphic } from './graphics.js';
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

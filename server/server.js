@@ -12,5 +12,6 @@ app.listen(PORT, () => {
 
 app.post('/gameMove', (req, res) => {
   const { command, x, y } = req.body;
-  res.send(directionLogic(command, x, y));
+  const directionResponse = directionLogic(command, x, y);
+  res.send(directionResponse);
 });
