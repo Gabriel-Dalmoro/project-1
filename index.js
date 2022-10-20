@@ -39,13 +39,20 @@ async function directionPostRequest(x, y, command) {
   return data;
 }
 
-// await intro();
-await welcome();
-log('You are in the start');
-await sleep(500);
-log(graphics.MAPS_OBJECT.map22);
+async function roomChallengeGetRequest(x, y) {
+  const response = await fetch('http://localhost:4005/roomChallenge/:room');
+  const data = await response.json();
 
-await sleep(1500);
+  log(data['room' + x + y]);
+}
+
+// await intro();
+// await welcome();
+// log('You are in the start');
+// await sleep(500);
+// log(graphics.MAPS_OBJECT.map22);
+
+// await sleep(1500);
 async function gameLoop() {
   let y = 2;
   let x = 2;
@@ -58,10 +65,12 @@ async function gameLoop() {
         )
     );
     let chooseDirection = rl.question(
-      chalk.hex('#FFC400').underline.bold('Where would you like to go?') + ' '
+      chalk.hex('#FFC400').underline.bold(`Where would you like to go? `)
     );
     const directionResult = await directionPostRequest(x, y, chooseDirection);
     log(directionResult.message);
+    const roomChallengeResult = await roomChallengeGetRequest(x, y);
+    log(roomChallengeResult);
     x = directionResult.x;
     y = directionResult.y;
   }

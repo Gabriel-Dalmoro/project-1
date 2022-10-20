@@ -35,6 +35,7 @@ export async function intro() {
 
 export const ROOM_DESCRIPTIONS = {
   x1y1: `
+
   You are in a spooky cemetery. An eerie feeling is in the air.
     ,-=-.       ______     _
    /  +  \\\     />----->  _|1|_
@@ -43,6 +44,7 @@ export const ROOM_DESCRIPTIONS = {
 \\vV,,|_____|V,//_____/VvV,v,|_|/,,vhjwv/,
   `,
   x1y2: `
+
   You are in a desert. The hot air brings prespiration running down your temples.
    
               /||\d\
@@ -68,6 +70,7 @@ export const ROOM_DESCRIPTIONS = {
 \\/  .   .    \\/     \\/    __..--..
   `,
   x1y3: `
+
     Ahead of you is a misterious pyramid.
     
                .
@@ -87,7 +90,9 @@ export const ROOM_DESCRIPTIONS = {
  /===========================\\'  /
 /=============================\\/
     `,
-  x2y1: `You come upon a mysterious temple.
+  x2y1: `
+  
+  You come upon a mysterious temple.
   
                )\\         O_._._._A_._._._O         /(
                 \\'--.___,'================='.___,--'/
@@ -119,12 +124,14 @@ export const ROOM_DESCRIPTIONS = {
  --'           / |__________________________________| \\
     `,
   x2y2: `
+
     This is the start room.
     
     You are in a blank room, with 4 doors. One to your north, one south, 
     one to the west, and another to the east.
     `,
   x2y3: `
+
     You are surrounded by mountains.
 
           /\\
@@ -138,6 +145,7 @@ export const ROOM_DESCRIPTIONS = {
 __/__/_______/___/__\\___\\__________________________________________________
 `,
   x3y1: `
+
     You are standing by a castle.
     
                                                   !_
@@ -177,6 +185,7 @@ __/__/_______/___/__\\___\\__________________________________________________
 ^^^^^^^^^^'^'^^'^'^'^^^""""""""^'^^''^^'^^'^^'^'^''^'^''^''^^
     `,
   x3y2: `
+
     You find yourself in a beautiful beach.
 
               ,.  _~-.,               .
@@ -199,6 +208,7 @@ _,.-=~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^''~=-.,.-=~''^''~=-.,__,.-=~'
 ~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^
     `,
   x3y3: `
+  
     You are standing by a lighthouse.
     
             +             /
@@ -223,6 +233,55 @@ _,.-=~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^''~=-.,.-=~''^''~=-.,__,.-=~'
     `,
 };
 
+export const ROOM_CHALLENGES = {
+  room11: `
+  A chill passes through you, and out of thin air a ghost appears.
+
+  .-.
+  .'   '.
+  :g g   :
+  : o    '.
+ :         '.
+:             '.
+:  :         .   '.
+:   :          ' . '.
+'.. :            '. ';
+   ':;             ':'
+      :              '.
+       '.              '.     .
+         '''''''---..,___';.-'
+
+`,
+  room12: `
+From the temple emerges a ninja who challenges you to battle!
+
+`,
+  room13: `
+A firery dragon wreaks havoc on the castle!
+
+`,
+  room21: `
+A great sand-worm emerges from the dunes and opens its gargantuan mouth to consume you!
+
+`,
+  room23: `
+You enjoy the beach, and wish there was a surfbord around to catch some waves...
+
+`,
+  room31: `
+You hear a loud rumbling, and notice the sarcophagus slowly opening...
+From its depths emerges a mummy, waking up after millenia, it rises and moves towards you.
+
+`,
+  room32: `
+You stumble upon a bear mother and her cubs, she growls at your for being too close!
+
+`,
+  room33: `
+Upon entering, you discover the lighthouse is actually a rocket ship, and your way out of the game!
+
+`,
+};
 /*idea for rooms in game:
                           
  +---------+   +---------+   +---------+

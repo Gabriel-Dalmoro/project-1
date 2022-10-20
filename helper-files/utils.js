@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { ROOM_DESCRIPTIONS } from './story.js';
+import { ROOM_CHALLENGES, ROOM_DESCRIPTIONS } from './story.js';
 import { MAPS_OBJECT } from '../helper-files/graphics.js';
 
 function findRoomDescriptions(x, y) {
@@ -11,6 +11,10 @@ function currentLocationMap(x, y) {
     `Here is your location:
       ` + MAPS_OBJECT['map' + x + y]
   );
+}
+
+export function showRoomChallenges(x, y) {
+  return ROOM_CHALLENGES['room' + x + y];
 }
 
 export function directionLogic(command, x, y) {
