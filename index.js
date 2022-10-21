@@ -6,7 +6,7 @@ import chalk from 'chalk';
 import chalkAnimation from 'chalk-animation';
 import { intro } from './helper-files/story.js';
 import fetch from 'node-fetch';
-import { pickUpKeys } from './helper-files/utils.js';
+import { keysLogc } from './helper-files/utils.js';
 
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -56,6 +56,7 @@ async function roomChallengeGetRequest(x, y) {
 
 // await sleep(1500);
 async function gameLoop() {
+  let keysTracker = [false, false, false];
   let y = 2;
   let x = 2;
   while (true) {
@@ -66,21 +67,34 @@ async function gameLoop() {
           `tip: at any point you can input "map" to see your current location`
         )
     );
-    let chooseDirection = rl.question(
-      chalk.hex('#FFC400').underline.bold(`Where would you like to go? `)
+    let command = rl.question(
+      chalk.hex('#FFC400').underline.bold(`Where would you like to go?`) + ` `
     );
-    const directionResult = await directionPostRequest(x, y, chooseDirection);
+    const directionResult = await directionPostRequest(x, y, command);
     log(directionResult.message);
-    if (chooseDirection === 'map' || chooseDirection === 'Map') {
+    if (command === 'map' || command === 'Map') {
+      continue;
+    }
+    if (
+      command !== 'south' &&
+      command !== 'north' &&
+      command !== 'east' &&
+      command !== 'west' &&
+      command !== 'up' &&
+      command !== 'down' &&
+      command !== 'left' &&
+      command !== 'right' &&
+      command !== 'bear'
+    ) {
       continue;
     }
     x = directionResult.x;
     y = directionResult.y;
     const roomChallengeResult = await roomChallengeGetRequest(x, y);
-    await sleep(2000);
+    // await sleep(2000);
     log(roomChallengeResult);
-    await sleep(1500);
-    pickUpKeys(x, y, chooseDirection);
+    // await sleep(1500);
+    keysLogc(x, y, command, keysTracker);
   }
 }
 

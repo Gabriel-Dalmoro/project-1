@@ -1,6 +1,5 @@
 import chalk from 'chalk';
 import { eyeGraphic } from './graphics.js';
-import { numOfKeys } from './utils.js';
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -286,7 +285,7 @@ But you need three keys to operate the rocket ship.
  +---------+   +---------+   +---------+
  |         |   |         |   |         |
  | pyramid |   |mountains|   |lighthouse|
- |         |   |         |   |         |
+ |   KEY   |   |   KEY   |   |         |
  +---------+   +---------+   +---------+
 
  +---------+   +---------+   +---------+
@@ -298,6 +297,6 @@ But you need three keys to operate the rocket ship.
  +---------+   +---------+   +---------+
  |         |   |         |   |         |
  |cemetery |   | temple  |   | castle  |
- |         |   |         |   |         |
+ |         |   |   KEY   |   |         |
  +---------+   +---------+   +---------+
  */

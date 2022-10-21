@@ -1,9 +1,11 @@
 import chalk from 'chalk';
 import { ROOM_DESCRIPTIONS } from './story.js';
 import { MAPS_OBJECT } from '../helper-files/graphics.js';
-import { rockPaperScissorsMiniGame } from './rock-paper-scissors-minigame/RPS-index.js';
+import { rockPaperScissorsMiniGame } from './RPS-minigame/RPS-index.js';
+// import { keysArr } from '../index.js';
 
 const log = console.log;
+
 function findRoomDescriptions(x, y) {
   return ROOM_DESCRIPTIONS['x' + x + 'y' + y];
 }
@@ -49,30 +51,55 @@ export function directionLogic(command, x, y) {
     return { x, y, message };
   }
 }
-export let numOfKeys = 0;
-export function pickUpKeys(x, y, command) {
-  let winner;
-  if (x === 2 && y === 1) {
-    while (winner !== 'player') {
-      winner = rockPaperScissorsMiniGame();
-      if (winner === 'player') {
-        numOfKeys++;
-        log(`You have won! The monk is greatly impressed, and hands you a key!
+
+export function keysLogc(x, y, command, keysTracker) {
+  function pickUpKeys(x, y, command) {
+    let winner;
+    function getOccurrence(array, value) {
+      return array.filter((v) => v === value).length;
+    }
+    // let keysArr = [false, false, false];
+    if (x === 2 && y === 1) {
+      while (winner !== 'player') {
+        winner = rockPaperScissorsMiniGame();
+        if (winner === 'player') {
+          keysTracker[0] = true;
+          log(
+            chalk.green.bold(`You have won! 
+          The monk is greatly impressed, and hands you a key!
 He still has a long journey torwards Rock Paper Scissors enlightenment.
-`);
-        log(`You have ${numOfKeys} keys`);
+`)
+          );
+          log(`You have ${getOccurrence(keysTracker, true)} keys`);
+        } else {
+          log(
+            chalk.red.bold(`You have lost.
+        
+        The monk deems you not worthy of receiving his precious key.
+        
+        You must try again to beat him in a best-of-5.
+        
+    
+      `)
+          );
+        }
       }
+    } else if (x === 2 && y === 3) {
+      if (command === 'bear' || command === 'Bear') {
+        keysTracker[1] = true;
+        log(
+          chalk.green.bold(`That is correct!`) +
+            `
+        
+        The elf recognizes your deep appreciation and reverence for nature and gladly hands you a key!
+        `
+        );
+        log(`You have ${getOccurrence(keysTracker, true)} keys`);
+      }
+    } else if (x === 1 && y === 3) {
+      keysTracker[2] = true;
+      log(`You have ${getOccurrence(keysTracker, true)} keys`);
     }
-  } else if (x === 2 && y === 3) {
-    if (command === 'bear' || command === 'Bear') {
-      numOfKeys++;
-      log(`You have ${numOfKeys} keys`);
-      log(`That is correct!
-  The elf recognizes your deep appreciation and reverence for nature and gladly hands you a key!`);
-    }
-  } else if (x === 1 && y === 3) {
-    numOfKeys++;
-    log(`You have ${numOfKeys} keys`);
-  } else if (numOfKeys === 3 && x === 3 && y === 3) {
   }
+  pickUpKeys(x, y, command);
 }

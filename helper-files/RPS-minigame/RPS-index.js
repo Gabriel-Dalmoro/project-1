@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import rl from 'readline-sync';
+// import { keysArr } from '../../index.js';
 import {
   declareComputerWinner,
   declarePlayerWinner,
@@ -9,7 +10,7 @@ import {
 } from './RPS-helpers.js';
 import { makeRandomComputerChoice, getPlayerChoice } from './RPS-constants.js';
 
-// type number keys [1], [2], [3], etc to select your choice.`);
+// keysArr[false, false, false];
 export function rockPaperScissorsMiniGame() {
   let playerScore = 0;
   let computerScore = 0;
@@ -79,10 +80,10 @@ export function rockPaperScissorsMiniGame() {
   }
   if (playerScore === 3) {
     winner = 'player';
-    chalk.bold.green(`You are the winner!`);
+    chalk.green(`You are the winner!`);
   } else if (computerScore === 3) {
     winner = 'monk';
-    chalk.bold.red(`The monk is the winner!`);
+    chalk.red(`The monk is the winner!`);
   }
   return winner;
 }
