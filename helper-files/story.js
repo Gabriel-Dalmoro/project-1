@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { eyeGraphic } from './graphics.js';
+import { numOfKeys } from './utils.js';
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -7,7 +8,7 @@ export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 export async function intro() {
   log(`Still feeling disoriented, you open your eyes.`);
   await sleep(3000);
-  eyeGraphic;
+  log(eyeGraphic);
   await sleep(3000);
   log(
     `You think to yourself, "I think it worked... yes... ` +
@@ -37,11 +38,11 @@ export const ROOM_DESCRIPTIONS = {
   x1y1: `
 
   You are in a spooky cemetery. An eerie feeling is in the air.
-    ,-=-.       ______     _
-   /  +  \\\     />----->  _|1|_
-   | ~~~ |    // -/- /  |_ H _|
-   |R.I.P|   //  /  /     |S|
-\\vV,,|_____|V,//_____/VvV,v,|_|/,,vhjwv/,
+      ,-=-.       ______     _
+     /  +  \\     />----->  _|1|_
+     | ~~~ |    // -/- /  |_ H _|
+     |R.I.P|   //  /  /     |S|
+\\vV,,|_____|V,//_____/VvV,v,|_|/,,VvVvV/,
   `,
   x1y2: `
 
@@ -145,44 +146,39 @@ export const ROOM_DESCRIPTIONS = {
 __/__/_______/___/__\\___\\__________________________________________________
 `,
   x3y1: `
-
-    You are standing by a castle.
+    You are standing by a spooky castle.
+    You hear the sound of bat wings flapping as they fly ominously around the castle.
     
-                                                  !_
-                                                  |*~=-.,
-                                                  |_,-''
-                                                  |
-                                                  |
-                                                 /^\\
-                   !_                           /   \\
-                   |*'~-.,                     /,    \\
-                   |.-~^'                     /#"     \\
-                   |                        _/##_   _  \\_
-              _   _|  _   _   _            [ ]_[ ]_[ ]_[ ]
-             [ ]_[ ]_[ ]_[ ]_[ ]            |_=_-=_ - =_|
-           !_ |_=_ =-_-_  = =_|           !_ |=_= -    |
-           |*'--,_- _        |            |*'~-.,= []  |
-           |.-'|=     []     |   !_       |_.-"'_-     |
-           |   |_=- -        |   |*'~-.,  |  |=_-      |
-          /^\\  |=_= -        |   |_,-~'  /^\\ |_ - =[]  |
-      _  /   \\_|_=- _   _   _|  _|  _   /   \\|=_-      |
-     [ ]/,    \\[ ]_[ ]_[ ]_[ ]_[ ]_[ ]_/,    \\[ ]=-    |
-      |/#"     \\_=-___=__=__- =-_ -=_ /#"     \\| _ []  |
-     _/##_   _  \\_-_ =  _____       _/##_   _  \\_ -    |\\
-    [ ]_[ ]_[ ]_[ ]=_0~{_ _ _}~0   [ ]_[ ]_[ ]_[ ]=-   | \\
-    |_=__-_=-_  =_|-=_ |  ,  |     |_=-___-_ =-__|_    |  \\
-     | _- =-     |-_   | ((* |      |= _=       | -    |___\\
-     |= -_=      |=  _ |  '  |      |_-=_       |=_    |/+\\|
-     | =_  -     |_ = _ '-.-'       | =_ = =    |=_-   ||+||
-     |-_=- _     |=_   =            |=_= -_     |  =   ||+||
-     |=_- /+\\    | -=               |_=- /+\\    |=_    |^^^|
-     |=_ |+|+|   |= -  -_,--,_      |_= |+|+|   |  -_  |=  |
-     |  -|+|+|   |-_=  / |  | \\     |=_ |+|+|   |-=_   |_-/
-     |=_=|+|+|   | =_= | |  | |     |_- |+|+|   |_ =   |=/
-     | _ ^^^^^   |= -  | |  <&>     |=_=^^^^^   |_=-   |/
-     |=_ =       | =_-_| |  | |     |   =_      | -_   |
-     |_=-_       |=_=  | |  | |     |=_=        |=-    |
-^^^^^^^^^^'^'^^'^'^'^^^""""""""^'^^''^^'^^'^^'^'^''^'^''^''^^
+    ^V^                    .-----.
+                         .'       '.
+                        :      ^v^  :
+                        :           :
+                        '           '
+         |~        www   '.       .'
+        /.\\       /#^^\\_   '-/\\--'
+       /#  \\     /#%    \\   /# \\          ^V^ 
+      /#%   \\   /#%______\\ /#%__\\
+     /#%     \\   |= I I ||  |- |
+     ~~|~~~|~~   |_=_-__|'  |[]|
+       |[] |_______\\__|/_ _ |= |'.
+^V^    |-  /= __   __    /-\\|= | :;
+       |= /- /\\/  /\\/   /=- \\.-' :;
+       | /_.=========._/_.-._\\  .:'
+       |= |-.'.- .'.- |  /|\\ |.:'
+       \\  |=|:|= |:| =| |~|~||'|
+        |~|-|:| -|:|  |-|~|~||=|      ^V^
+        |=|=|:|- |:|- | |~|~|| |
+        | |-_~__=_~__=|_^^^^^|/___
+        |-(=-=-=-=-=-(|=====/=_-=/\\
+        | |=_-= _=- _=| -_=/=_-_/__\\ 
+        | |- _ =_-  _-|=_- |]#| I II
+        |=|_/ \\_-_= - |- = |]#| I II
+        | /  _/ \\. -_=| =__|]!!!I_II!!
+       _|/-'/  ' \\_/ \\|/' _ ^^^^'.==_^.
+     _/  _/'-./'-; '-.\\_ / \\_'\\'. '. ==='.
+    / .-'  __/_   '.   _/.' .-' '-. ; ====;\\
+   /.   './    \\ '. \\ / -  /  .-'.' ====='  >
+  /  \\  /  .-' '--.  / .' /  '-.' ======.' /
     `,
   x3y2: `
 
@@ -235,33 +231,26 @@ _,.-=~''^''~=-.,__,.-=~''^''~=-.,__,.-=~''^''~=-.,.-=~''^''~=-.,__,.-=~'
 
 export const ROOM_CHALLENGES = {
   room11: `
-  A chill passes through you, and out of thin air a ghost appears.
-
-  .-.
-  .'   '.
-  :g g   :
-  : o    '.
- :         '.
-:             '.
-:  :         .   '.
-:   :          ' . '.
-'.. :            '. ';
-   ':;             ':'
-      :              '.
-       '.              '.     .
-         '''''''---..,___';.-'
+  A chill passes through you, and an you feel unsettled.
+  Best leave this place...
 
 `,
   room21: `
-From the temple emerges a ninja who challenges you to battle!
+  Sitting cross-legged by the temple entrance is a monk, deep in meditation.
+  He has been meditating for years on the secrets and mysteries of rock, paper, scissors.
+
+  If you beat him in a best-of-three he will reward you with a key.
 
 `,
   room31: `
-A firery dragon wreaks havoc on the castle!
+A vampire emerges from the dark depths of the castle, thirsty for blood...
+Thankfully you ate garlic bread for lunch, and your breath repells the vampire back into his lair.
+
+Best leave before he comes back...
 
 `,
   room12: `
-A great sand-worm emerges from the dunes and opens its gargantuan mouth to consume you!
+In the distance to the north you see a triangular shape on the horizon...
 
 `,
   room32: `
@@ -269,16 +258,26 @@ You enjoy the beach, and wish there was a surfbord around to catch some waves...
 
 `,
   room13: `
-You hear a loud rumbling, and notice the sarcophagus slowly opening...
-From its depths emerges a mummy, waking up after millenia, it rises and moves towards you.
+  On the floor, right outside the main entrance to the pyramid, there seems to be a shinny object burried in the sand.
+
+  It's a key!
 
 `,
-  room23: `
-You stumble upon a bear mother and her cubs, she growls at your for being too close!
-
-`,
+  room23:
+    `
+  A mountain hermit looks wise and promises a prize if you can solve his riddle:
+  
+  ` +
+    chalk.bold.italic(`I'm warm and fuzzy but I don't cuddle. 
+  Spot me then run (even through puddles). 
+  I'm brown, or black, and even grizzly. 
+  I'll gobble up your barbecue if your sausages are sizzly. 
+  
+  What am I?
+  `),
   room33: `
 Upon entering, you discover the lighthouse is actually a rocket ship, and your way out of the game!
+But you need three keys to operate the rocket ship.
 
 `,
 };

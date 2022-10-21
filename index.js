@@ -6,6 +6,7 @@ import chalk from 'chalk';
 import chalkAnimation from 'chalk-animation';
 import { intro } from './helper-files/story.js';
 import fetch from 'node-fetch';
+import { pickUpKeys } from './helper-files/utils.js';
 
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -47,14 +48,13 @@ async function roomChallengeGetRequest(x, y) {
   return data;
 }
 
-await intro();
-log(graphics.eyeGraphic);
-await welcome();
-log('You are in the start');
-await sleep(500);
-log(graphics.MAPS_OBJECT.map22);
+// await intro();
+// await welcome();
+// log('You are in the start');
+// await sleep(500);
+// log(graphics.MAPS_OBJECT.map22);
 
-await sleep(1500);
+// await sleep(1500);
 async function gameLoop() {
   let y = 2;
   let x = 2;
@@ -77,9 +77,11 @@ async function gameLoop() {
     x = directionResult.x;
     y = directionResult.y;
     const roomChallengeResult = await roomChallengeGetRequest(x, y);
-    await sleep(2000);
+    // await sleep(2000);
     log(roomChallengeResult);
-    await sleep(1500);
+    // await sleep(1500);
+    pickUpKeys(x, y, chooseDirection);
   }
 }
+
 gameLoop();
