@@ -77,9 +77,9 @@ async function gameLoop() {
     x = directionResult.x;
     y = directionResult.y;
     const roomChallengeResult = await roomChallengeGetRequest(x, y);
-    // await sleep(2000);
+    await sleep(2000);
     log(roomChallengeResult);
-    // await sleep(1500);
+    await sleep(1500);
     pickUpKeys(x, y, chooseDirection);
   }
 }

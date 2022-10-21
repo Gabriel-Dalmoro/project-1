@@ -1,4 +1,4 @@
-import cfonts from 'cfonts';
+import chalk from 'chalk';
 import rl from 'readline-sync';
 import {
   declareComputerWinner,
@@ -10,25 +10,21 @@ import {
 import { makeRandomComputerChoice, getPlayerChoice } from './RPS-constants.js';
 
 // type number keys [1], [2], [3], etc to select your choice.`);
-let playerScore = 0;
-let computerScore = 0;
 export function rockPaperScissorsMiniGame() {
+  let playerScore = 0;
+  let computerScore = 0;
+  let winner;
   for (
     let currentGame = 1;
-    computerScore <= 3 || playerScore <= 3;
+    computerScore < 3 && playerScore < 3;
     currentGame++
   ) {
-    let winner;
-    if (playerScore === 3) {
-      winner = 'player';
-    } else if (computerScore === 3) {
-      winner = 'hermit';
-    }
+    //TODO: change for loop into while loop
     log('Now you must choose Rock, Paper or Scissors:');
     let playerChoice = getPlayerChoice();
     log(`You chose: ${playerChoice}.`);
     let computerRandomChoice = makeRandomComputerChoice();
-    log(`The computer chose: ${computerRandomChoice}.`);
+    log(`The monk chose: ${computerRandomChoice}.`);
 
     function gameLogic(playerChoice, computerRandomChoice) {
       bothScores(playerScore, computerScore);
@@ -81,4 +77,12 @@ export function rockPaperScissorsMiniGame() {
     }
     gameLogic(playerChoice, computerRandomChoice);
   }
+  if (playerScore === 3) {
+    winner = 'player';
+    chalk.bold.green(`You are the winner!`);
+  } else if (computerScore === 3) {
+    winner = 'monk';
+    chalk.bold.red(`The monk is the winner!`);
+  }
+  return winner;
 }

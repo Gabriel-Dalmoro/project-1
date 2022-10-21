@@ -265,16 +265,16 @@ You enjoy the beach, and wish there was a surfbord around to catch some waves...
 `,
   room23:
     `
-  A mountain hermit looks wise and promises a prize if you can solve his riddle:
+  A mountain elf looks wise and promises a prize if you can solve his riddle:
   
   ` +
     chalk.bold.italic(`I'm warm and fuzzy but I don't cuddle. 
   Spot me then run (even through puddles). 
   I'm brown, or black, and even grizzly. 
-  I'll gobble up your barbecue if your sausages are sizzly. 
-  
+  I'll gobble up your barbecue if your sausages are sizzly. `) +
+    `
   What am I?
-  `),
+  `,
   room33: `
 Upon entering, you discover the lighthouse is actually a rocket ship, and your way out of the game!
 But you need three keys to operate the rocket ship.

@@ -2,7 +2,7 @@ import cfonts from 'cfonts';
 import * as graphics from './RPS-graphics.js';
 
 export const declareComputerWinner = () =>
-  cfonts.say('The winner is the computer', {
+  cfonts.say('The winner is the monk', {
     colors: ['red'],
     font: 'console',
   });
@@ -25,6 +25,6 @@ export function logRoundGraphics(playerChoice, computerRandomChoice) {
 export function bothScores(playerScore, computerScore) {
   log(`
   Your total score = ${playerScore}.
-  The computer's total score = ${computerScore}.
+  The monk's total score = ${computerScore}.
   `);
 }

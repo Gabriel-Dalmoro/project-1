@@ -1,6 +1,6 @@
 {
   "name": "1-project",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "My project 1 for InceptionU; a command line text game.",
   "main": "index.js",
   "type": "module",

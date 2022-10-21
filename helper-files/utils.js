@@ -53,21 +53,22 @@ export let numOfKeys = 0;
 export function pickUpKeys(x, y, command) {
   let winner;
   if (x === 2 && y === 1) {
-    rockPaperScissorsMiniGame();
-    if (winner === 'player') {
-      numOfKeys++;
-      log(`You have won! The monk is greatly impressed, and hands you a key!
-He still has a long journey torwards Rock Paper Scissors enlightenment.`);
+    while (winner !== 'player') {
+      winner = rockPaperScissorsMiniGame();
+      if (winner === 'player') {
+        numOfKeys++;
+        log(`You have won! The monk is greatly impressed, and hands you a key!
+He still has a long journey torwards Rock Paper Scissors enlightenment.
+`);
+        log(`You have ${numOfKeys} keys`);
+      }
     }
-    // } else {
-    //   //play RPC again until wins
-    // }
   } else if (x === 2 && y === 3) {
     if (command === 'bear' || command === 'Bear') {
       numOfKeys++;
       log(`You have ${numOfKeys} keys`);
       log(`That is correct!
-  The hermit recognizes your deep appreciation for nature and gladly hands you a key!`);
+  The elf recognizes your deep appreciation and reverence for nature and gladly hands you a key!`);
     }
   } else if (x === 1 && y === 3) {
     numOfKeys++;
