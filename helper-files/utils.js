@@ -13,10 +13,6 @@ function currentLocationMap(x, y) {
   );
 }
 
-export function showRoomChallenges(x, y) {
-  return ROOM_CHALLENGES['room' + x + y];
-}
-
 export function directionLogic(command, x, y) {
   let message;
   let newX = x;

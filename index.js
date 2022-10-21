@@ -4,8 +4,7 @@ import cfonts from 'cfonts';
 import rl from 'readline-sync';
 import chalk from 'chalk';
 import chalkAnimation from 'chalk-animation';
-// import { intro, roomDescriptions } from './story.js';
-import { directionLogic } from './helper-files/utils.js';
+import { intro } from './helper-files/story.js';
 import fetch from 'node-fetch';
 
 const log = console.log;
@@ -40,19 +39,22 @@ async function directionPostRequest(x, y, command) {
 }
 
 async function roomChallengeGetRequest(x, y) {
-  const response = await fetch('http://localhost:4005/roomChallenge/:room');
-  const data = await response.json();
+  const response = await fetch(
+    'http://localhost:4005/roomChallenge/room' + x + y
+  );
+  const data = await response.text();
 
-  log(data['room' + x + y]);
+  return data;
 }
 
-// await intro();
-// await welcome();
-// log('You are in the start');
-// await sleep(500);
-// log(graphics.MAPS_OBJECT.map22);
+await intro();
+log(graphics.eyeGraphic);
+await welcome();
+log('You are in the start');
+await sleep(500);
+log(graphics.MAPS_OBJECT.map22);
 
-// await sleep(1500);
+await sleep(1500);
 async function gameLoop() {
   let y = 2;
   let x = 2;
@@ -69,10 +71,15 @@ async function gameLoop() {
     );
     const directionResult = await directionPostRequest(x, y, chooseDirection);
     log(directionResult.message);
-    const roomChallengeResult = await roomChallengeGetRequest(x, y);
-    log(roomChallengeResult);
+    if (chooseDirection === 'map' || chooseDirection === 'Map') {
+      continue;
+    }
     x = directionResult.x;
     y = directionResult.y;
+    const roomChallengeResult = await roomChallengeGetRequest(x, y);
+    await sleep(2000);
+    log(roomChallengeResult);
+    await sleep(1500);
   }
 }
 gameLoop();

@@ -47,21 +47,21 @@ export const ROOM_DESCRIPTIONS = {
 
   You are in a desert. The hot air brings prespiration running down your temples.
    
-              /||\d\
+              /||\\
               ||||
               ||||
               |||| /|\\
          /|\\  |||| |||
          |||  |||| |||
          |||  |||| |||
-         |||  |||| d||
+         |||  |||| |||
          |||  |||||||/
-         ||b._||||~~'
+         |||._||||~~'
          \\||||||||
           '~~~||||
               ||||
               ||||
-~~~~~~~~~~~~~~~~||||~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~||||~~~~~~~~~~~~~~
 \\/..__..--  . |||| \\/  .  ..
 \\/         \\/ \\/    \\/
       .  \\/              \\/    .
@@ -252,28 +252,28 @@ export const ROOM_CHALLENGES = {
          '''''''---..,___';.-'
 
 `,
-  room12: `
+  room21: `
 From the temple emerges a ninja who challenges you to battle!
 
 `,
-  room13: `
+  room31: `
 A firery dragon wreaks havoc on the castle!
 
 `,
-  room21: `
+  room12: `
 A great sand-worm emerges from the dunes and opens its gargantuan mouth to consume you!
 
 `,
-  room23: `
+  room32: `
 You enjoy the beach, and wish there was a surfbord around to catch some waves...
 
 `,
-  room31: `
+  room13: `
 You hear a loud rumbling, and notice the sarcophagus slowly opening...
 From its depths emerges a mummy, waking up after millenia, it rises and moves towards you.
 
 `,
-  room32: `
+  room23: `
 You stumble upon a bear mother and her cubs, she growls at your for being too close!
 
 `,
