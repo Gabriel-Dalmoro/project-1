@@ -1,6 +1,5 @@
 import chalk from 'chalk';
 import rl from 'readline-sync';
-// import { keysArr } from '../../index.js';
 import {
   declareComputerWinner,
   declarePlayerWinner,
@@ -10,7 +9,6 @@ import {
 } from './RPS-helpers.js';
 import { makeRandomComputerChoice, getPlayerChoice } from './RPS-constants.js';
 
-// keysArr[false, false, false];
 export function rockPaperScissorsMiniGame() {
   let playerScore = 0;
   let computerScore = 0;

@@ -6,7 +6,7 @@ import chalk from 'chalk';
 import chalkAnimation from 'chalk-animation';
 import { intro } from './helper-files/story.js';
 import fetch from 'node-fetch';
-import { keysLogc } from './helper-files/utils.js';
+import { endOfGame, keysLogc } from './helper-files/utils.js';
 
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -56,7 +56,7 @@ async function roomChallengeGetRequest(x, y) {
 
 // await sleep(1500);
 async function gameLoop() {
-  let keysTracker = [false, false, false];
+  let keysTracker = [true, true, true];
   let y = 2;
   let x = 2;
   while (true) {
@@ -91,11 +91,25 @@ async function gameLoop() {
     x = directionResult.x;
     y = directionResult.y;
     const roomChallengeResult = await roomChallengeGetRequest(x, y);
-    // await sleep(2000);
+    await sleep(2000);
     log(roomChallengeResult);
-    // await sleep(1500);
+    await sleep(1500);
     keysLogc(x, y, command, keysTracker);
+    const threeKeys = await endOfGame(x, y, keysTracker);
+    if (threeKeys === true) {
+      break;
+    }
   }
+  await sleep(2300);
+  cfonts.say('The End', {
+    colors: ['green'],
+    font: 'block',
+  });
+  await sleep(2000);
+  log(
+    chalk.green.bold(`Thank you for playing!
+  `)
+  );
 }
 
 gameLoop();

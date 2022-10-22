@@ -2,9 +2,9 @@ import chalk from 'chalk';
 import { ROOM_DESCRIPTIONS } from './story.js';
 import { MAPS_OBJECT } from '../helper-files/graphics.js';
 import { rockPaperScissorsMiniGame } from './RPS-minigame/RPS-index.js';
-// import { keysArr } from '../index.js';
 
 const log = console.log;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function findRoomDescriptions(x, y) {
   return ROOM_DESCRIPTIONS['x' + x + 'y' + y];
@@ -52,13 +52,13 @@ export function directionLogic(command, x, y) {
   }
 }
 
+function getOccurrence(array, value) {
+  return array.filter((v) => v === value).length;
+}
+
 export function keysLogc(x, y, command, keysTracker) {
   function pickUpKeys(x, y, command) {
     let winner;
-    function getOccurrence(array, value) {
-      return array.filter((v) => v === value).length;
-    }
-    // let keysArr = [false, false, false];
     if (x === 2 && y === 1) {
       while (winner !== 'player') {
         winner = rockPaperScissorsMiniGame();
@@ -79,7 +79,6 @@ He still has a long journey torwards Rock Paper Scissors enlightenment.
         
         You must try again to beat him in a best-of-5.
         
-    
       `)
           );
         }
@@ -102,4 +101,60 @@ He still has a long journey torwards Rock Paper Scissors enlightenment.
     }
   }
   pickUpKeys(x, y, command);
+}
+
+export async function endOfGame(x, y, keysTracker) {
+  if (x === 3 && y === 3) {
+    if (getOccurrence(keysTracker, true) === 3) {
+      log(chalk.green.bold.underline(`You have all 3 keys!`));
+      await sleep(1500);
+      log(`
+      You use the three keys which you so skillfully aquired to activate the hidden rocketship.
+      `);
+      await sleep(3200);
+      log(`
+       !
+       !
+       ^
+      / \\
+     /___\\
+    |=   =|
+    |     |
+    |     |
+    |     |
+    |     |
+    |     |
+    |     |
+    |     |
+    |     |
+    |     |
+   /|##!##|\\
+  / |##!##| \\
+ /  |##!##|  \\
+|  / ^ | ^ \\  |
+| /  ( | )  \\ |
+|/   ( | )   \\|
+    ((   ))
+   ((  :  ))
+   ((  :  ))
+    ((   ))
+     (( ))
+      ( )
+       .
+       .
+       .
+      `);
+      return true;
+    } else if (getOccurrence(keysTracker, true) === 2) {
+      log(`
+      You are missing 1 key!
+      Come back when you have all 3 keys.
+      `);
+    } else if (getOccurrence(keysTracker, true) === 1) {
+      log(`
+      You are missing 2 keys!
+      Come back when you have all 3 keys.
+      `);
+    }
+  }
 }
