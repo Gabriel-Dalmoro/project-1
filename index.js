@@ -1,12 +1,12 @@
 //basic structure to the game
-import * as graphics from './helper-files/graphics.js';
+import * as graphics from './src/helper-files/graphics.js.js';
 import cfonts from 'cfonts';
 import rl from 'readline-sync';
 import chalk from 'chalk';
 import chalkAnimation from 'chalk-animation';
-import { intro } from './helper-files/story.js';
+import { intro } from './src/helper-files/story.js.js';
 import fetch from 'node-fetch';
-import { endOfGame, keysLogc } from './helper-files/utils.js';
+import { endOfGame, keysLogc } from './src/helper-files/utils.js.js';
 
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -49,14 +49,14 @@ async function roomChallengeGetRequest(x, y) {
 }
 
 // await intro();
-// await welcome();
-// log('You are in the start');
-// await sleep(500);
-// log(graphics.MAPS_OBJECT.map22);
+await welcome();
+log('You are in the start');
+await sleep(500);
+log(graphics.MAPS_OBJECT.map22);
 
-// await sleep(1500);
+await sleep(1500);
 async function gameLoop() {
-  let keysTracker = [true, true, true];
+  let keysTracker = [false, false, false];
   let y = 2;
   let x = 2;
   while (true) {

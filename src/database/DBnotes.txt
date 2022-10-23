@@ -1,0 +1,1 @@
+mongodb+srv://GabrielDalmoro:project1@cluster0.zskrxmb.mongodb.net/?retryWrites=true&w=majority
