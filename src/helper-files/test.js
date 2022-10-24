@@ -1,13 +1,11 @@
-import {
-  map11,
-  map12,
-  map13,
-  map21,
-  map22,
-  map23,
-  map31,
-  map32,
-  map33,
-} from './helper-files/graphics.js';
+import User from '../database/model/User.js';
 
-console.log(map22);
+// const user1 = await User.create({
+//   userName: 'usertest',
+//   updatedX: 2,
+//   updatedY: 2,
+//   ammountOfKeys: [false, false, false],
+// });
+
+const firstUser = await User.findOne({});
+console.log(firstUser);

@@ -1,12 +1,13 @@
 //basic structure to the game
-import * as graphics from './src/helper-files/graphics.js.js';
+import * as graphics from './src/helper-files/graphics.js';
 import cfonts from 'cfonts';
 import rl from 'readline-sync';
 import chalk from 'chalk';
 import chalkAnimation from 'chalk-animation';
-import { intro } from './src/helper-files/story.js.js';
+import { intro } from './src/helper-files/story.js';
 import fetch from 'node-fetch';
-import { endOfGame, keysLogc } from './src/helper-files/utils.js.js';
+import { endOfGame, keysLogc } from './src/helper-files/utils.js';
+import User from './src/database/model/User.js';
 
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -48,13 +49,40 @@ async function roomChallengeGetRequest(x, y) {
   return data;
 }
 
+async function getUser() {
+  log(
+    `Would you like to create a new user-name, input your existing user-name, or play as guest?`
+  );
+  await sleep(1500);
+  const userArr = [
+    'Create user-name',
+    'Input existing user-name',
+    'Play as guest',
+  ];
+  const userChoice =
+    userArr[
+      rl.keyInSelect(userArr, 'Use number keys [1], [2], or [3] to choose: ')
+    ];
+  if (userChoice === 'Create user-name') {
+    const newUserName = rl.question('Choose your new user-name: ');
+    return await User.create({
+      userName: newUserName,
+    });
+  } else if (userChoice === 'Input existing user-name') {
+    const existingUserName = rl.question('What is your existing user-name: ');
+    return await User.findOne({ userName: existingUserName });
+  }
+}
+
 // await intro();
-await welcome();
+// await welcome();
+let user = await getUser();
+log(user);
 log('You are in the start');
 await sleep(500);
 log(graphics.MAPS_OBJECT.map22);
 
-await sleep(1500);
+await sleep(2500);
 async function gameLoop() {
   let keysTracker = [false, false, false];
   let y = 2;

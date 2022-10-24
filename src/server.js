@@ -1,6 +1,6 @@
 import express from 'express';
-import { ROOM_CHALLENGES } from './helper-files/story.js.js';
-import { directionLogic } from './helper-files/utils.js.js';
+import { ROOM_CHALLENGES } from './helper-files/story.js';
+import { directionLogic } from './helper-files/utils.js';
 
 const app = express();
 const PORT = 4005;
