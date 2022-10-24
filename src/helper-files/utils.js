@@ -22,20 +22,20 @@ export function directionLogic(command, x, y) {
   let newX = x;
   let newY = y;
   let answer;
-  command === 'north' || command === 'up'
+  command.toLowerCase() === 'north' || command.toLowerCase() === 'up'
     ? newY++
-    : command === 'south' || command === 'down'
+    : command.toLowerCase() === 'south' || command.toLowerCase() === 'down'
     ? newY--
-    : command === 'east' || command === 'right'
+    : command.toLowerCase() === 'east' || command.toLowerCase() === 'right'
     ? newX++
-    : command === 'west' || command === 'left'
+    : command.toLowerCase() === 'west' || command.toLowerCase() === 'left'
     ? newX--
-    : command === 'map' || command === 'Map'
+    : command.toLowerCase() === 'map'
     ? (message = currentLocationMap(x, y))
-    : command === 'bear' || command === 'Bear'
+    : command.toLowerCase() === 'bear'
     ? newX
     : (message = chalk.yellow('Command not valid'));
-  if (command === 'map' || command === 'Map') {
+  if (command.toLowerCase() === 'map') {
     answer = { x, y, message };
     return answer;
   }
@@ -84,7 +84,7 @@ He still has a long journey torwards Rock Paper Scissors enlightenment.
         }
       }
     } else if (x === 2 && y === 3) {
-      if (command === 'bear' || command === 'Bear') {
+      if (command.toLowerCase() === 'bear') {
         keysTracker[1] = true;
         log(
           chalk.green.bold(`That is correct!`) +
