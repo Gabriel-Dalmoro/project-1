@@ -38,6 +38,8 @@ export function directionLogic(command, x, y) {
     ? newX
     : command.toLowerCase() === 'quit'
     ? newX
+    : command.toLowerCase() === 'keys'
+    ? newX
     : (message = chalk.yellow('Command not valid'));
   if (command.toLowerCase() === 'map') {
     answer = { x, y, message };
@@ -56,7 +58,7 @@ export function directionLogic(command, x, y) {
   }
 }
 
-function getOccurrence(array, value) {
+export function getOccurrence(array, value) {
   return array.filter((v) => v === value).length;
 }
 
@@ -164,14 +166,12 @@ export async function endOfGame(x, y, keysTracker) {
 }
 
 export async function createUserName(newUserName) {
-  // const newUserName = rl.question('Choose your new user-name: ');
   return await User.create({
     userName: newUserName,
   });
 }
 
 export async function findUserName(existingUserName) {
-  // const existingUserName = rl.question('What is your existing user-name: ');
   return await User.findOne({ userName: existingUserName });
 }
 

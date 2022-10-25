@@ -17,7 +17,9 @@ On a separate terminal, run `$ node index.js.` to start game.
 
 3. The game is a 3X3 grid, and each quadrant is a different environmet. There are challenges in some quadrants and prizes to be gained.
 
-4. You can save your progress and resume where you left off by creating a username and logging back in with it.
+4. Type "left", "right", "up", "down" **or** "north", "south", "east", "west", to move around.
+
+5. You can save your progress and resume where you left off by creating a username and logging back in with it.
 
 ---
 

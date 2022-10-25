@@ -10,6 +10,7 @@ import {
   createUserName,
   endOfGame,
   findUserName,
+  getOccurrence,
   keysLogc,
   updateUser,
 } from './src/helper-files/utils.js';
@@ -47,28 +48,6 @@ async function directionPostRequest(x, y, command) {
   return data;
 }
 
-async function createUserPostRequest(x, y, amountOfKeys) {
-  const body = { x, y, amountOfKeys };
-  const response = await fetch('http://localhost:4005/newUser', {
-    method: 'Post',
-    body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' },
-  });
-  const data = await response.json();
-  return data;
-}
-
-async function updateUserPatchRequest(user) {
-  const body = { x, y, amountOfKeys };
-  const response = await fetch('http://localhost:4005/update/' + user, {
-    method: 'PATCH',
-    body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' },
-  });
-  const data = await response.json();
-  return data;
-}
-
 async function roomChallengeGetRequest(x, y) {
   const response = await fetch(
     'http://localhost:4005/roomChallenge/room' + x + y
@@ -82,7 +61,7 @@ await welcome();
 log(
   `Would you like to create a new user-name, input your existing user-name, or play as guest?`
 );
-// await sleep(2500);
+await sleep(2500);
 const userArr = [
   'Create user-name',
   'Input existing user-name',
@@ -106,17 +85,9 @@ if (userChoice === 'Create user-name') {
   user = await findUserName('guestUser');
 }
 
-// let user = await createUserPostRequest(x, y, amountOfKeys);
 amountOfKeys = user.amountOfKeys;
 x = user.x;
 y = user.y;
-// } else if (userChoice === 'Input existing user-name') {
-//   user = findUserName();
-// }
-log(user);
-// log('You are in the start');
-// await sleep(500);
-// log(graphics.MAPS_OBJECT.map22);
 
 await sleep(2500);
 async function gameLoop() {
@@ -126,20 +97,25 @@ async function gameLoop() {
         `tips: 
     - at any point you can input "map" to see your current location.
     - if you created a user-name, input "quit" to exit the game and save your progress.
+    - input "keys" to check how many keys you have.
             `
       )
     );
     let command = rl.question(
-      chalk.hex('#FFC400').underline.bold(`Where would you like to go?`) + ` `
+      chalk.hex('#FFC400').underline.bold(`What is your command?`) + ` `
     );
+    if (command === 'keys') {
+      log(
+        chalk.bold(`
+      You have ${getOccurrence(amountOfKeys, true)} keys
+      `)
+      );
+      continue;
+    }
     if (command === 'quit' && user.userName !== 'guestUser') {
-      // user.x = x;
-      // user.y = y;
-      // user.amountOfKeys = amountOfKeys;
       updateUser(user, x, y, amountOfKeys);
       log(`Saving game...`);
       break;
-      // await
     }
     const directionResult = await directionPostRequest(x, y, command);
     log(directionResult.message);
@@ -156,6 +132,7 @@ async function gameLoop() {
       command !== 'left' &&
       command !== 'right' &&
       command !== 'quit' &&
+      command !== 'keys' &&
       command !== 'bear'
     ) {
       continue;
@@ -163,11 +140,10 @@ async function gameLoop() {
     x = directionResult.x;
     y = directionResult.y;
     const roomChallengeResult = await roomChallengeGetRequest(x, y);
-    await sleep(2000);
+    await sleep(4000);
     log(roomChallengeResult);
     await sleep(1500);
     keysLogc(x, y, command, amountOfKeys);
-
     const threeKeys = await endOfGame(x, y, amountOfKeys);
     if (threeKeys === true) {
       await sleep(2300);
@@ -178,7 +154,6 @@ async function gameLoop() {
       break;
     }
   }
-
   await sleep(2000);
   log(
     chalk.green.bold(`Thank you for playing!
