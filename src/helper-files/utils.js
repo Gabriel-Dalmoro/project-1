@@ -2,6 +2,8 @@ import chalk from 'chalk';
 import { ROOM_DESCRIPTIONS } from './story.js';
 import { MAPS_OBJECT } from '../helper-files/graphics.js';
 import { rockPaperScissorsMiniGame } from './RPS-minigame/RPS-index.js';
+import rl from 'readline-sync';
+import User from '../database/model/User.js';
 
 const log = console.log;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -33,6 +35,8 @@ export function directionLogic(command, x, y) {
     : command.toLowerCase() === 'map'
     ? (message = currentLocationMap(x, y))
     : command.toLowerCase() === 'bear'
+    ? newX
+    : command.toLowerCase() === 'quit'
     ? newX
     : (message = chalk.yellow('Command not valid'));
   if (command.toLowerCase() === 'map') {
@@ -157,4 +161,23 @@ export async function endOfGame(x, y, keysTracker) {
       `);
     }
   }
+}
+
+export async function createUserName(newUserName) {
+  // const newUserName = rl.question('Choose your new user-name: ');
+  return await User.create({
+    userName: newUserName,
+  });
+}
+
+export async function findUserName(existingUserName) {
+  // const existingUserName = rl.question('What is your existing user-name: ');
+  return await User.findOne({ userName: existingUserName });
+}
+
+export async function updateUser(user, x, y, amountOfKeys) {
+  user.x = x;
+  user.y = y;
+  user.amountOfKeys = amountOfKeys;
+  await user.save();
 }

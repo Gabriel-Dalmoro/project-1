@@ -10,9 +10,9 @@ const { Schema, model } = mongoose;
 
 const testSchema = new Schema({
   userName: String,
-  updatedX: { type: Number, default: 2 },
-  updatedY: { type: Number, default: 2 },
-  ammountOfKeys: { type: Array, default: [false, false, false] },
+  x: { type: Number, default: 2 },
+  y: { type: Number, default: 2 },
+  amountOfKeys: { type: Array, default: [false, false, false] },
 });
 
 const User = model('User', testSchema);

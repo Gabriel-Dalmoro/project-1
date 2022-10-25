@@ -6,8 +6,15 @@ import chalk from 'chalk';
 import chalkAnimation from 'chalk-animation';
 import { intro } from './src/helper-files/story.js';
 import fetch from 'node-fetch';
-import { endOfGame, keysLogc } from './src/helper-files/utils.js';
+import {
+  createUserName,
+  endOfGame,
+  findUserName,
+  keysLogc,
+  updateUser,
+} from './src/helper-files/utils.js';
 import User from './src/database/model/User.js';
+import mongoose from 'mongoose';
 
 const log = console.log;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -40,64 +47,100 @@ async function directionPostRequest(x, y, command) {
   return data;
 }
 
+async function createUserPostRequest(x, y, amountOfKeys) {
+  const body = { x, y, amountOfKeys };
+  const response = await fetch('http://localhost:4005/newUser', {
+    method: 'Post',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function updateUserPatchRequest(user) {
+  const body = { x, y, amountOfKeys };
+  const response = await fetch('http://localhost:4005/update/' + user, {
+    method: 'PATCH',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  return data;
+}
+
 async function roomChallengeGetRequest(x, y) {
   const response = await fetch(
     'http://localhost:4005/roomChallenge/room' + x + y
   );
   const data = await response.text();
-
   return data;
 }
 
-async function getUser() {
-  log(
-    `Would you like to create a new user-name, input your existing user-name, or play as guest?`
-  );
-  await sleep(1500);
-  const userArr = [
-    'Create user-name',
-    'Input existing user-name',
-    'Play as guest',
+// await intro();
+await welcome();
+log(
+  `Would you like to create a new user-name, input your existing user-name, or play as guest?`
+);
+// await sleep(2500);
+const userArr = [
+  'Create user-name',
+  'Input existing user-name',
+  'Play as guest',
+];
+const userChoice =
+  userArr[
+    rl.keyInSelect(userArr, 'Use number keys [1], [2], or [3] to choose: ')
   ];
-  const userChoice =
-    userArr[
-      rl.keyInSelect(userArr, 'Use number keys [1], [2], or [3] to choose: ')
-    ];
-  if (userChoice === 'Create user-name') {
-    const newUserName = rl.question('Choose your new user-name: ');
-    return await User.create({
-      userName: newUserName,
-    });
-  } else if (userChoice === 'Input existing user-name') {
-    const existingUserName = rl.question('What is your existing user-name: ');
-    return await User.findOne({ userName: existingUserName });
-  }
+let user;
+let amountOfKeys;
+let x;
+let y;
+if (userChoice === 'Create user-name') {
+  const newUserName = rl.question('Choose your new user-name: ');
+  user = await createUserName(newUserName);
+} else if (userChoice === 'Input existing user-name') {
+  const existingUserName = rl.question('What is your existing user-name: ');
+  user = await findUserName(existingUserName);
+} else if (userChoice === 'Play as guest') {
+  user = await findUserName('guestUser');
 }
 
-// await intro();
-// await welcome();
-let user = await getUser();
+// let user = await createUserPostRequest(x, y, amountOfKeys);
+amountOfKeys = user.amountOfKeys;
+x = user.x;
+y = user.y;
+// } else if (userChoice === 'Input existing user-name') {
+//   user = findUserName();
+// }
 log(user);
-log('You are in the start');
-await sleep(500);
-log(graphics.MAPS_OBJECT.map22);
+// log('You are in the start');
+// await sleep(500);
+// log(graphics.MAPS_OBJECT.map22);
 
 await sleep(2500);
 async function gameLoop() {
-  let keysTracker = [false, false, false];
-  let y = 2;
-  let x = 2;
   while (true) {
     log(
-      chalk
-        .hex('#FFC400')
-        .italic(
-          `tip: at any point you can input "map" to see your current location`
-        )
+      chalk.hex('#FFC400').italic(
+        `tips: 
+    - at any point you can input "map" to see your current location.
+    - if you created a user-name, input "quit" to exit the game and save your progress.
+            `
+      )
     );
     let command = rl.question(
       chalk.hex('#FFC400').underline.bold(`Where would you like to go?`) + ` `
     );
+    if (command === 'quit' && user.userName !== 'guestUser') {
+      // user.x = x;
+      // user.y = y;
+      // user.amountOfKeys = amountOfKeys;
+      updateUser(user, x, y, amountOfKeys);
+      log(`Saving game...`);
+      break;
+      // await
+    }
     const directionResult = await directionPostRequest(x, y, command);
     log(directionResult.message);
     if (command === 'map' || command === 'Map') {
@@ -112,6 +155,7 @@ async function gameLoop() {
       command !== 'down' &&
       command !== 'left' &&
       command !== 'right' &&
+      command !== 'quit' &&
       command !== 'bear'
     ) {
       continue;
@@ -122,22 +166,25 @@ async function gameLoop() {
     await sleep(2000);
     log(roomChallengeResult);
     await sleep(1500);
-    keysLogc(x, y, command, keysTracker);
-    const threeKeys = await endOfGame(x, y, keysTracker);
+    keysLogc(x, y, command, amountOfKeys);
+
+    const threeKeys = await endOfGame(x, y, amountOfKeys);
     if (threeKeys === true) {
+      await sleep(2300);
+      cfonts.say('The End', {
+        colors: ['green'],
+        font: 'block',
+      });
       break;
     }
   }
-  await sleep(2300);
-  cfonts.say('The End', {
-    colors: ['green'],
-    font: 'block',
-  });
+
   await sleep(2000);
   log(
     chalk.green.bold(`Thank you for playing!
   `)
   );
+  process.exit();
 }
 
 gameLoop();
