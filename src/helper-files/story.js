@@ -238,7 +238,7 @@ export const ROOM_CHALLENGES = {
   Sitting cross-legged by the temple entrance is a monk, deep in meditation.
   He has been meditating for years on the secrets and mysteries of rock, paper, scissors.
 
-  If you beat him in a best-of-three he will reward you with a key.
+  If you beat him in a best-of-5 he will reward you with a key.
 
 `,
   room31: `

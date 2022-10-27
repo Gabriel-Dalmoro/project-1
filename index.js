@@ -56,7 +56,7 @@ async function roomChallengeGetRequest(x, y) {
   return data;
 }
 
-// await intro();
+await intro();
 await welcome();
 log(
   `Would you like to create a new user-name, input your existing user-name, or play as guest?`
@@ -151,6 +151,21 @@ async function gameLoop() {
         colors: ['green'],
         font: 'block',
       });
+      await sleep(1500);
+      log(`
+      _O/               ,
+        \\              /           \\O_
+        /\\_        '\\_\\        ,/\\/
+        \\  '           \\         /
+         '             /O\\       \\
+                                  '
+      `);
+      const danceTitle = chalkAnimation.rainbow(
+        'Interpretative Dance BONUS!!',
+        0.68
+      );
+      await sleep(3000);
+      danceTitle.stop();
       break;
     }
   }
